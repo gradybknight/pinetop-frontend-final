@@ -26,8 +26,11 @@ class FractionalStill extends Component {
     updateGraph() {
         this.props.getGraphData();
     }
+    
 
     render() {
+        const normalise = (current, total) => {Math.floor(current/total*100)} ;
+
         // let lastTimePoint = this.props.graphData[this.props.graphData.length-1].x;
         // let lastTemperature = this.props.graphData[this.props.graphData.length-1].y;
         let lastTimePoint="now"
@@ -44,13 +47,13 @@ class FractionalStill extends Component {
                     <SnackbarContent message={this.props.serverRunOverview.message}/>
                     <br />
                     <Typography gutterBottom variant="body1" component="p">
-                            Progress in Beaker Number {this.props.serverRunOverview.currentBeaker}
+                            Progress in Beaker Number {this.props.serverRunOverview.currentBeaker}. Click {this.props.serverRunOverview.currentClickCountInBeaker} of {this.props.serverRunOverview.totalClickCountInBeaker}
                     </Typography>
-                    <LinearProgress variant="determinate" value={this.props.serverRunOverview.totalClickCountInBeaker == 0 ? 0 : this.props.serverRunOverview.currentClickCountInBeaker / this.props.serverRunOverview.totalClickCountInBeaker} />
+                    <LinearProgress variant="determinate" value={this.props.serverRunOverview.totalClickCountInBeaker == 0 ? 0 : (this.props.serverRunOverview.currentClickCountInBeaker / this.props.serverRunOverview.totalClickCountInBeaker*100)} />
                     <Typography gutterBottom variant="body1" component="p">
-                            Overall Run Progress
+                            Overall Run Progress: Beaker {this.props.serverRunOverview.currentBeaker} out of 21
                         </Typography>
-                    <LinearProgress variant="determinate" value={this.props.serverRunOverview.currentBeaker / 21} />
+                    <LinearProgress variant="determinate" value={this.props.serverRunOverview.currentBeaker / 21 * 100} />
                 </Paper>
                 {this.props.serverRunOverview.running ? '' : <InitiateFractionalStillCard />}
                 {this.props.serverRunOverview.running ? '' : <FractionalStillButtons />}
