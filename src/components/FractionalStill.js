@@ -59,8 +59,9 @@ class FractionalStill extends Component {
                         </Typography>
                     <LinearProgress variant="determinate" value={this.props.serverRunOverview.currentBeaker / 21} />
                 </Paper>
-                <InitiateFractionalStillCard />
-                <FractionalStillButtons />
+                {this.props.serverRunOverview.message!=='Run complete' ? '' : <InitiateFractionalStillCard />}
+                {this.props.serverRunOverview.message!=='Run complete' ? '' : <FractionalStillButtons />}
+                
             </div>
         )
   }
