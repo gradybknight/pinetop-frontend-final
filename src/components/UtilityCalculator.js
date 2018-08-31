@@ -13,6 +13,7 @@ class UtilityCalculator extends Component {
     }
     
     onChange(e) {
+        // eslint-disable-next-line
         let newVolumeHearts = 120 / (parseInt(this.state.startingAlcoholPercent));
         this.setState({volumeOfHeartsToAdd:newVolumeHearts})
         this.setState({[e.target.name]: e.target.value});
