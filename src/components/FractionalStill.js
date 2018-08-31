@@ -15,8 +15,8 @@ class FractionalStill extends Component {
     componentDidMount() {
         this.props.getGraphData();
         this.props.getRunOverview();
-        this.interval =  setInterval(this.props.getGraphData, 60000);
-        this.intervalOverview = setInterval(this.props.getRunOverview, 5000)
+        this.interval =  setInterval(this.props.getGraphData, 30000);
+        this.intervalOverview = setInterval(this.props.getRunOverview, 2500)
     }
 
     componentWillUnmount() {
