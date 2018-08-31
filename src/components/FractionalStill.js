@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setPot, setGraphData } from '../actions/PotStillAction'
+import { getRunOverview, getGraphData} from '../actions/FractionalStillAction';
 import UnitOpTabCard from '../components/UnitOpTabCard';
 import FractionalStillButtons from './FractionalStillButtons';
 import InitiateFractionalStillCard from './InitiateFractionalStillCard';
-
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 
 class FractionalStill extends Component {
 
@@ -16,8 +16,8 @@ class FractionalStill extends Component {
     }
 
     componentDidMount() {
-        // this.interval =  setInterval(this.props.setGraphData, 500);
-
+        this.interval =  setInterval(this.props.getGraphData, 60000);
+        this.intervalOverview = setInterval(this.props.getRunOverview, 5000)
     }
 
     componentWillUnmount() {
@@ -25,7 +25,7 @@ class FractionalStill extends Component {
     }
 
     updateGraph() {
-        this.props.setGraphData();
+        this.props.getGraphData();
     }
 
     render() {
@@ -35,12 +35,14 @@ class FractionalStill extends Component {
         let lastTimePoint="now"
         return (
             <div>
+                <SnackbarContent message={this.props.serverRunOverview.message}/>
                 <UnitOpTabCard 
                     headline="Fractional Still" 
                     graphData={this.props.graphData}
                     lastTimePoint={lastTimePoint}
                     lastTemperature={lastTemperature}
                 />
+                
                 <InitiateFractionalStillCard />
                 <FractionalStillButtons />
             </div>
@@ -49,14 +51,14 @@ class FractionalStill extends Component {
 }
 
 FractionalStill.propTypes = {
-    setPot: PropTypes.func.isRequired,
-    setGraphData: PropTypes.func.isRequired
+    getRunOverview: PropTypes.func.isRequired,
+    getGraphData: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-    graphData: state.potStill.graphData,
-    isRunning: state.potStill.isRunning
+    graphData: state.fractionalStill.fractionalGraphData,
+    serverRunOverview: state.fractionalStill.serverRunOverview
 })
 
 
-export default connect(mapStateToProps, { setPot, setGraphData })(FractionalStill);
+export default connect(mapStateToProps, { getRunOverview, getGraphData })(FractionalStill);
