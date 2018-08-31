@@ -11,13 +11,7 @@ import { LinearProgress } from '../../node_modules/@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
 class FractionalStill extends Component {
-
-
-    changePotState = () => {
-        console.log(`changing state to ${!this.props.isRunning}`);
-        this.props.setPot(!this.props.isRunning);
-    }
-
+    
     componentDidMount() {
         this.props.getGraphData();
         this.props.getRunOverview();
@@ -36,7 +30,6 @@ class FractionalStill extends Component {
     render() {
         // let lastTimePoint = this.props.graphData[this.props.graphData.length-1].x;
         // let lastTemperature = this.props.graphData[this.props.graphData.length-1].y;
-        let lastTemperature = 75
         let lastTimePoint="now"
         return (
             <div>
@@ -52,15 +45,15 @@ class FractionalStill extends Component {
                     <br />
                     <Typography gutterBottom variant="body1" component="p">
                             Progress in Beaker Number {this.props.serverRunOverview.currentBeaker}
-                        </Typography>
+                    </Typography>
                     <LinearProgress variant="determinate" value={this.props.serverRunOverview.totalClickCountInBeaker == 0 ? 0 : this.props.serverRunOverview.currentClickCountInBeaker / this.props.serverRunOverview.totalClickCountInBeaker} />
                     <Typography gutterBottom variant="body1" component="p">
                             Overall Run Progress
                         </Typography>
                     <LinearProgress variant="determinate" value={this.props.serverRunOverview.currentBeaker / 21} />
                 </Paper>
-                {this.props.serverRunOverview.message!=='Run complete' ? '' : <InitiateFractionalStillCard />}
-                {this.props.serverRunOverview.message!=='Run complete' ? '' : <FractionalStillButtons />}
+                {this.props.serverRunOverview.running ? '' : <InitiateFractionalStillCard />}
+                {this.props.serverRunOverview.running ? '' : <FractionalStillButtons />}
                 
             </div>
         )
