@@ -7,7 +7,8 @@ import TextField from '@material-ui/core/TextField';
 class InitiateFractionalStillCard extends Component {
     state = {
         startAlcohol:.3,
-        startVolume:38.8
+        startVolume:38.8,
+        enteredPassPhrase:''
     };
 
     handleChange = name => event => {
@@ -75,9 +76,19 @@ class InitiateFractionalStillCard extends Component {
                     onChange={this.onChange}
                 />
                 <br />
-                <Button variant="contained" color="primary" onClick={this.startSimplifiedRun}>
+                <TextField
+                    id="enteredPassPhrase"
+                    name="enteredPassPhrase"
+                    label="Passphrase"
+                    defaultValue=""
+                    helperText="Please enter the passcode to start the fractional still"
+                    margin="normal"
+                    onChange={this.onChange}
+                />
+                <br />
+                {this.state.enteredPassPhrase == 'Bacon911' ? <Button variant="contained" color="primary" onClick={this.startSimplifiedRun}>
                     Start Fractional Run
-                </Button>
+                </Button> : <div></div>}
                 </Paper>
             </div>
         )
