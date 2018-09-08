@@ -29,33 +29,37 @@ class FractionalStill extends Component {
     
 
     render() {
-        const normalise = (current, total) => {Math.floor(current/total*100)} ;
-
-        // let lastTimePoint = this.props.graphData[this.props.graphData.length-1].x;
-        // let lastTemperature = this.props.graphData[this.props.graphData.length-1].y;
         let lastTimePoint="now"
         return (
             <div>
                 
-                <UnitOpTabCard 
+                {this.props.serverRunOverview.running ? <UnitOpTabCard 
                     headline="Fractional Still" 
                     graphData={this.props.graphData}
                     lastTimePoint={lastTimePoint}
                     lastTemperature={this.props.serverRunOverview.currentTemperature}
-                />
+                /> : ''}
+                <br />
                 <Paper>
-                    <SnackbarContent message={this.props.serverRunOverview.message}/>
                     <br />
-                    <Typography gutterBottom variant="body1" component="p">
-                            Progress in Beaker Number {this.props.serverRunOverview.currentBeaker}. Click {this.props.serverRunOverview.currentClickCountInBeaker} of {this.props.serverRunOverview.totalClickCountInBeaker}
+                    <Typography align="center" gutterBottom variant="headline" component="h2">
+                                {this.props.serverRunOverview.running ? this.props.serverRunOverview.message : `Fractional Still is ready for the next batch`}
                     </Typography>
-                    <LinearProgress variant="determinate" value={this.props.serverRunOverview.totalClickCountInBeaker == 0 ? 0 : (this.props.serverRunOverview.currentClickCountInBeaker / this.props.serverRunOverview.totalClickCountInBeaker*100)} />
-                    <Typography gutterBottom variant="body1" component="p">
-                            Overall Run Progress: Beaker {this.props.serverRunOverview.currentBeaker} out of 20
-                        </Typography>
-                    <LinearProgress variant="determinate" value={this.props.serverRunOverview.currentBeaker / 20 * 100} />
                     <br />
+                    {this.props.serverRunOverview.running ? 
+                    <div>
+                        <Typography gutterBottom variant="body1" component="p">
+                                Progress in Beaker Number {this.props.serverRunOverview.currentBeaker}. Click {this.props.serverRunOverview.currentClickCountInBeaker} of {this.props.serverRunOverview.totalClickCountInBeaker}
+                        </Typography>
+                        <LinearProgress variant="determinate" value={this.props.serverRunOverview.totalClickCountInBeaker == 0 ? 0 : (this.props.serverRunOverview.currentClickCountInBeaker / this.props.serverRunOverview.totalClickCountInBeaker*100)} />
+                        <Typography gutterBottom variant="body1" component="p">
+                                Overall Run Progress: Beaker {this.props.serverRunOverview.currentBeaker} out of 20
+                            </Typography>
+                        <LinearProgress variant="determinate" value={this.props.serverRunOverview.currentBeaker / 20 * 100} />
+                        <br />
+                    </div> : '' }
                 </Paper>
+                <br />
                 {this.props.serverRunOverview.running ? '' : <FractionalStillButtons />}
                 <br />
                 {this.props.serverRunOverview.running ? '' : <InitiateFractionalStillCard />}

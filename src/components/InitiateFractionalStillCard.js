@@ -32,16 +32,18 @@ class InitiateFractionalStillCard extends Component {
 
     startFractionalRun () {
         console.log(this.state);
+        let fractionalStillInitiatingValues = JSON.stringify({startAlcohol:this.state.startAlcohol, startVolume:this.state.startVolume});
         axios.post('http://107.13.224.253:3001/setfractional', {
-            startAlcohol:this.state.startAlcohol,
-            startVolume:this.state.startVolume
+            fractionalStillInitiatingValues
         })
             .then(res => {
-                console.log(res.data.message);
+                console.log(res.data);
                 let message = res.data.message;
                 this.setState({message:message})
             })
     }
+
+
 
     startSimplifiedRun () {
         console.log(this.state);
@@ -86,7 +88,7 @@ class InitiateFractionalStillCard extends Component {
                     onChange={this.onChange}
                 />
                 <br />
-                {this.state.enteredPassPhrase == 'Bacon911' ? <Button variant="contained" color="primary" onClick={this.startSimplifiedRun}>
+                {this.state.enteredPassPhrase === 'Bacon911' ? <Button variant="contained" color="primary" onClick={this.startFractionalRun}>
                     Start Fractional Run
                 </Button> : <div></div>}
                 </Paper>
