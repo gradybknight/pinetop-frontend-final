@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { LinearProgress } from '../../node_modules/@material-ui/core';
+import CurrentDateAndTime from '../components/CurrentDateAndTime';
 
 
 class Dashboard extends Component {
@@ -44,16 +45,17 @@ class Dashboard extends Component {
                         <br />
 
                         <Typography gutterBottom variant="headline" component="h2">
-                            {this.props.serverRunOverview.running ? `Fractional Still is active. ${this.props.serverRunOverview.message}`: `Fractional Still is idle. ${this.props.serverRunOverview.message}`}
+                            {this.props.serverRunOverview.running ? `Fractional Still is active. ${this.props.serverRunOverview.message}. Current Temperature is ${this.props.serverRunOverview.currentTemperature} C.`: `Fractional Still is idle. ${this.props.serverRunOverview.message}`}
                         </Typography>
                         {this.props.serverRunOverview.running ? <LinearProgress variant="determinate" value={(this.props.serverRunOverview.currentBeaker/20*100)} /> : <LinearProgress variant="determinate" value={0} />}
                         <br />
 
                         <Typography gutterBottom variant="headline" component="h2">
-                            {this.props.serverPotOverview.running ? `Pot Still is active.  Current temperature is ${this.props.serverPotOverview.columnTemperature}`: `Pot Still is idle.`}
+                            {this.props.serverPotOverview.running ? `Pot Still is active.  Current temperature is ${this.props.serverPotOverview.columnTemperature} C.`: `Pot Still is idle.`}
                         </Typography>
                         {this.props.serverPotOverview.running ? <LinearProgress variant="determinate" value={10} /> : <LinearProgress variant="determinate" value={0} />}
-
+                        <br/>
+                        <CurrentDateAndTime />
                     
                     </CardContent>
                 </Card>

@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPotRunOverview, getPotGraphData } from '../actions/PotStillAction'
 import UnitOpTabCard from '../components/UnitOpTabCard';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField';
 import PotStillPassPhrase from '../components/PotStillPassPhrase'
 
 
@@ -30,7 +27,7 @@ class PotStillCard extends Component {
     render() {
         return (
             <div>
-                {this.props.running ? 
+                {this.props.serverPotOverview.running ? 
                     <UnitOpTabCard 
                         headline="Pot Still" 
                         graphData={this.props.graphData}
