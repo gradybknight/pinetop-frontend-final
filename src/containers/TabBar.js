@@ -4,7 +4,7 @@ import TabbedNavBar from '../components/TabbedNavBar';
 import { setActiveCard } from '../actions/userAction';
 import PotStillCard from './PotStillCard';
 import UtilityCalculator from '../components/UtilityCalculator';
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../containers/Dashboard';
 import FractionalStill from '../components/FractionalStill';
 
 const TabBar = ( props ) => {

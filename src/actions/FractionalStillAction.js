@@ -2,7 +2,6 @@ import { GET_FRACTIONAL_GRAPH_DATA, GET_RUN_OVERVIEW } from './types'
 import axios from "axios"
 import store from '../store'
 
-
 export const getRunOverview = () => dispatch => {
     let serverString = `http://107.13.224.253:3001/fractionalsummary`
     axios.get(serverString)

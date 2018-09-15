@@ -1,59 +1,44 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setPot, setGraphData } from '../actions/PotStillAction'
+import { getPotRunOverview, getPotGraphData } from '../actions/PotStillAction'
 import UnitOpTabCard from '../components/UnitOpTabCard';
-import OperationButton from '../components/OperationButton';
-
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField';
+import PotStillPassPhrase from '../components/PotStillPassPhrase'
 
 
 class PotStillCard extends Component {
 
-
-    changePotState = () => {
-        console.log(`changing state to ${!this.props.isRunning}`);
-        this.props.setPot(!this.props.isRunning);
-    }
-
     componentDidMount() {
-        // this.interval =  setInterval(this.props.setGraphData, 500);
-
+        this.props.getPotGraphData();
+        this.props.getPotRunOverview();
+        this.interval = setInterval(this.props.getPotGraphData, 30000);
+        this.intervalOverview = setInterval(this.props.getPotRunOverview, 60000);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
+        clearInterval(this.intervalOverview);
     }
 
     updateGraph() {
-        this.props.setGraphData();
+        this.props.getPotGraphData();
     }
 
     render() {
-        // let lastTimePoint = this.props.graphData[this.props.graphData.length-1].x;
-        // let lastTemperature = this.props.graphData[this.props.graphData.length-1].y;
-        let lastTemperature = 75
-        let lastTimePoint="now"
         return (
             <div>
-                <UnitOpTabCard 
-                    headline="100 Gallon Pot Still" 
-                    graphData={this.props.graphData}
-                    lastTimePoint={lastTimePoint}
-                    lastTemperature={lastTemperature}
-                />
-                {this.props.isRunning ? 
-                    <OperationButton 
-                        buttonName="Stop Pot Still" 
-                        buttonColor = "secondary"
-                        onClick={this.changePotState}
+                {this.props.running ? 
+                    <UnitOpTabCard 
+                        headline="Pot Still" 
+                        graphData={this.props.graphData}
+                        lastTimePoint='n/a'
+                        lastTemperature={this.props.serverPotOverview.columnTemperature}
                     /> :
-                    <OperationButton 
-                        buttonName="Start Pot Still" 
-                        buttonColor = "primary"
-                        onClick={this.changePotState}
-                    />
+                    <PotStillPassPhrase />
                 }
-
             </div>
         )
   }
@@ -66,8 +51,8 @@ PotStillCard.propTypes = {
 
 const mapStateToProps = state => ({
     graphData: state.potStill.graphData,
-    isRunning: state.potStill.isRunning
+    serverPotOverview: state.potStill.serverPotOverview
 })
 
 
-export default connect(mapStateToProps, { setPot, setGraphData })(PotStillCard);
+export default connect(mapStateToProps, { getPotRunOverview, getPotGraphData })(PotStillCard);

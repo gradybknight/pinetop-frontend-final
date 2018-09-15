@@ -88,6 +88,7 @@ class FractionalStillButtons extends Component {
                         <Button variant="contained" color="secondary" onClick={this.heatOff}>
                             Heat Off
                         </Button>
+                        <br />
                         <p> {this.state.message} </p>
                     </Grid>
                 </Paper>
