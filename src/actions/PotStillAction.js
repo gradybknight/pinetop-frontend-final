@@ -6,7 +6,6 @@ export const getPotRunOverview = () => dispatch => {
     let serverString = `http://107.13.224.253:3001/potsummary`
     axios.get(serverString)
         .then(res => {
-            console.log(res.data);
             return res.data.serverPotOverview;
         })
         .then(serverPotOverview => dispatch({

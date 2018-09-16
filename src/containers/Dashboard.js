@@ -17,11 +17,16 @@ class Dashboard extends Component {
         this.props.getPotRunOverview();
         this.fractionalUpdater = setInterval(this.props.getRunOverview, 30000);
         this.potUpdater= setInterval(this.props.getPotRunOverview, 30000);
+        this.percentRunComplete = (Date.now() - this.props.serverPotOverview.timeStarted) / (this.props.serverPotOverview.forcedTerminationTime * 60 * 60 * 1000)*100;
+        this.percentRunCompleteUpdater = setInterval( () => {
+            this.percentRunComplete = (Date.now() - this.props.serverPotOverview.timeStarted) / (this.props.serverPotOverview.forcedTerminationTime * 60 * 60 * 1000)*100;
+        },1000)
     }
 
     componentWillUnmount() {
         clearInterval(this.fractionalUpdater);
         clearInterval(this.potUpdater);
+        clearInterval(this.percentRunCompleteUpdater);
     }
 
     updateGraph() {
@@ -34,7 +39,7 @@ class Dashboard extends Component {
                 <Card >
                     <CardContent>
                         <Typography gutterBottom variant="headline" component="h2">
-                            MashTun
+                            Mash Tun
                         </Typography>
                         <LinearProgress variant="determinate" value={0} />
                         <br />
@@ -53,7 +58,7 @@ class Dashboard extends Component {
                         <Typography gutterBottom variant="headline" component="h2">
                             {this.props.serverPotOverview.running ? `Pot Still is active.  Current temperature is ${this.props.serverPotOverview.columnTemperature} C.`: `Pot Still is idle.`}
                         </Typography>
-                        {this.props.serverPotOverview.running ? <LinearProgress variant="determinate" value={10} /> : <LinearProgress variant="determinate" value={0} />}
+                        {this.props.serverPotOverview.running ? <LinearProgress variant="determinate" value={this.percentRunComplete} /> : <LinearProgress variant="determinate" value={0} />}
                         <br/>
                         <CurrentDateAndTime />
                     
@@ -65,8 +70,8 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    serverRunOverview: PropTypes.func.isRequired,
-    serverPotOverview: PropTypes.func.isRequired
+    getPotRunOverview: PropTypes.func.isRequired,
+    getRunOverview: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
