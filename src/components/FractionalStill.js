@@ -39,7 +39,6 @@ class FractionalStill extends Component {
                     lastTimePoint={lastTimePoint}
                     lastTemperature={this.props.serverRunOverview.currentTemperature}
                 /> : ''}
-                <br />
                 <Paper>
                     <br />
                     <Typography align="center" gutterBottom variant="headline" component="h2">

@@ -30,7 +30,12 @@ class PotStillButtons extends Component {
 
     startPotRun() {
         console.log(this.state);
-        let potStillInitiatingValues = JSON.stringify({forcedTerminationTime:40, typeOfRun:'Large Stripping'});
+        let potStillInitiatingValues = {};
+        if (this.state.selectedBigPot) {
+            potStillInitiatingValues = JSON.stringify({forcedTerminationTime:40, typeOfRun:'Large Stripping'});
+        } else {
+            potStillInitiatingValues = JSON.stringify({forcedTerminationTime:8, typeOfRun:'Large Stripping'});
+        }
         axios.post('http://107.13.224.253:3001/setpot', {
             potStillInitiatingValues
         })

@@ -42,11 +42,11 @@ class Dashboard extends Component {
                             Mash Tun
                         </Typography>
                         <LinearProgress variant="determinate" value={0} />
-                        <br />
-                        <Typography gutterBottom variant="headline" component="h2">
+                        {/* <br /> */}
+                        {/* <Typography gutterBottom variant="headline" component="h2">
                             Continuous Still
                         </Typography>
-                        <LinearProgress variant="determinate" value={0} />
+                        <LinearProgress variant="determinate" value={0} /> */}
                         <br />
 
                         <Typography gutterBottom variant="headline" component="h2">

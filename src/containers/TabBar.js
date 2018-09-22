@@ -20,7 +20,7 @@ const TabBar = ( props ) => {
         <div>
             <TabbedNavBar tabName={props.allowedTabs} testFunction={setActiveTab} />
             {/* {props.activeCard === 'Explanation' ? <ExplanationCard /> : ""} */}
-            {props.activeCard === 'Stripping Pot' ? <PotStillCard /> : ""}
+            {props.activeCard === 'Pot Still' ? <PotStillCard /> : ""}
             {props.activeCard === 'Utility Calculators' ? <UtilityCalculator /> : ""}
             {props.activeCard === 'Dashboard' ? <Dashboard /> : ""}
             {props.activeCard === 'Fractional Still' ? <FractionalStill /> : ""}

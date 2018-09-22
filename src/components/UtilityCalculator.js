@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Paper, Typography, TextField } from '../../node_modules/@material-ui/core';
+import TestContainer from '../containers/TestContainer';
 
 class UtilityCalculator extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class UtilityCalculator extends Component {
             <div>
                 <Paper>
                     <Typography variant="headline" component="h1">
-                        Gin Dilution Calculator
+                        Dilution for starting gin run
                     </Typography>
                     <Typography component="p">
                             Hearts Alcohol Percentage:
