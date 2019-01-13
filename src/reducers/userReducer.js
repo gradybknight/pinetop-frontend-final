@@ -7,7 +7,7 @@ const initialState = {
                     'Dashboard',
                     'Pot Still',
                     'Fractional Still',
-                    'Utility Calculators'                
+                    'Utility Calculators'            
     ],
     isMobileDevice:false,
     activeCard:'Dashboard',

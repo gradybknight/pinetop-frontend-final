@@ -24,6 +24,7 @@ const TabBar = ( props ) => {
             {props.activeCard === 'Utility Calculators' ? <UtilityCalculator /> : ""}
             {props.activeCard === 'Dashboard' ? <Dashboard /> : ""}
             {props.activeCard === 'Fractional Still' ? <FractionalStill /> : ""}
+            {/* {props.activeCard === 'Purchase History' ? <PurchaseHistory /> : ""} */}
         </div>
     )
 }
